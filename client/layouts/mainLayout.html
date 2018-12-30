@@ -1,0 +1,24 @@
+<template name = "mainLayout">
+  <header>
+    <h1><i class="fa fa-lemon-o" aria-hidden="true"></i> My Cooking Manager</h1>
+    {{> loginButtons}}
+  </header>
+  {{> sideNav}}
+  <main class="main-layout">
+    {{> Template.dynamic template=main}}
+  </main>
+</template>
+
+<template name="sideNav">
+	<ul class="side-nav">
+		<li>
+			<a href="/cook-book"><i class="fa fa-book" aria-hidden="true"></i>Cook Book</a>
+		</li>
+		<li>
+			<a href="/menu"><i class = "fa fa-map-o"></i>Menu</a>
+		</li>
+		<li>
+			<a href="/shopping-list"><i class = "fa fa-shopping-cart"></i>Shoping List</a>
+		</li>
+	</ul>
+</template>

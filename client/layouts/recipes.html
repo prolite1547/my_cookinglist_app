@@ -1,0 +1,56 @@
+<template name = "Recipes">
+	<h1 class="page-title">Manage Cook Book</h1>
+
+		{{#if $.Session.get 'addnew'}}
+	       {{> newRecipes}}
+		{{else}}
+			 <!--	<button class="new-recipe">New Recipe</button> -->
+			 	<button class="new-recipe"><i class="fa fa-plus" aria-hidden="true"></i> Add New Recipe</button>
+		{{/if}}
+	<section class="recipes">
+	{{#if Template.subscriptionsReady}}
+		{{#each recipes}}
+			{{> Recipe}}
+		{{/each}}
+	{{else}}
+		<p>Loading ...</p>
+	{{/if}}
+	</section>
+</template>
+
+<template name = "newRecipes">
+	 <div class="new-recipe-container">
+		<i class="fa fa-close"></i>
+	 	{{> quickForm collection="Recipes" id="insertRecipeForm" type="insert" class="new-recipe-form"}}
+	 </div>
+</template>
+
+<template name ="Recipe">
+	<article class="recipe {{#if inMenu}}in-menu{{/if}}">
+		<h3> {{name}}</h3>
+		{{#if EditMode}}
+			{{> quickForm collection="Recipes" id=updateRecipeId type="update" doc=this}}
+		{{else}}
+		<p>{{desc}}</p>
+		<p>
+			<strong>Ingredients : </strong> <br>
+			{{#each ingredient}}
+				{{name}} - {{quantity}} <br>
+			{{/each}}
+		</p>
+	<!--	<a href="/recipe/{{_id}}">View Details</a> -->
+	{{#if inMenu}}
+		<button class="btn-deny toggle-menu"><i class="fa fa-minus-circle" aria-hidden="true"></i> Remove From Menu</button>
+		{{else}}
+		<button class="btn-confirmation toggle-menu"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add To Menu</button>
+	{{/if}}
+	{{/if}}
+	<i class="fa fa-pencil"></i>
+	<i class="fa fa-trash"></i>
+
+	</article>
+</template>
+
+<template name="recipeSingle">
+	<h1>{{recipe.name}}</h1>
+</template>
